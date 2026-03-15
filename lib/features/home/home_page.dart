@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import '../../widget/product_card.dart';
+import '../profile/profile_page.dart';
+import '../transaction/transaction_page.dart';
+import '../notification/notification_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,26 +13,52 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int _currentIndex = 0;
+  bool isSearching = false;
 
   final List<Widget> _pages = [
-    ListView(
+    GridView.count(
+      crossAxisCount: 2,
       padding: const EdgeInsets.all(16),
+      crossAxisSpacing: 12,
+      mainAxisSpacing: 12,
+      childAspectRatio: 0.68,
       children: const [
-        ProductCard(title: " Sepatu Nike", price: "Rp. 100.000"),
-        ProductCard(title: "Tas Adidas", price: "Rp 300.000"),
+        ProductCard(title: " Sepatu Nike", price: "Rp. 100.000", image: "https://cdn.antaranews.com/cache/1200x800/2021/03/28/Exbfpl2WgAAQkl8.jpg",),
+        ProductCard(title: "Sepatu Adidas", price: "Rp 300.000", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8fp_uB8-Jx-C-jggRfRp6Aq2k5oiHXEKR_A&s",),
 
-        ProductCard(title: "Jaket Hoodie", price: "Rp 250.000"),
+        ProductCard(title: "Jaket Hoodie", price: "Rp 250.000", image: "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRr9CI5a_sWdLAcfrYhgSW0r6VtTpPu9uObREhQAkG6EQdG6eUH",),
       ],
     ),
-    const Center(child: Text("Home Page")),
-    const Center(child: Text("Search Page")),
-    const Center(child: Text("Profil Page")),
+    const TransactionPage(),
+    const NotificationPage(),
+    const ProfilePage(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("E-Commerce Mini")),
+      appBar: AppBar(
+        backgroundColor: Colors.blue,
+        title: Padding(
+        padding: EdgeInsets.only(bottom: 8),
+        child: TextField(
+          decoration: InputDecoration(
+            hintText: "Cari Produk...",
+            prefixIcon: Icon(Icons.search),
+            filled: true,
+            fillColor: Colors.white,
+            contentPadding: EdgeInsets.symmetric(vertical: 0),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+              borderSide: BorderSide.none,
+            ),
+          ),
+        ),
+        ),
+        actions: [
+          IconButton(icon: Icon(Icons.shopping_cart), onPressed: () {}),
+        ],
+      ),
 
       body: _pages[_currentIndex],
 
@@ -43,11 +72,16 @@ class _HomePageState extends State<HomePage> {
         },
 
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
-
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Beranda"),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.receipt),
+            label: "Transaksi",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.notifications),
+            label: "Notifikasi",
+          ),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Saya"),
         ],
       ),
     );
