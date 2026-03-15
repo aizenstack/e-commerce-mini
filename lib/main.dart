@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Belajar Flutter Day 1',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lighTheme,
-      initialRoute: AppRoutes.home,
+      initialRoute: AppRoutes.login,
       routes: AppRoutes.routes,
     );
   }

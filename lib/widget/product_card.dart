@@ -3,43 +3,59 @@ import 'package:flutter/material.dart';
 class ProductCard extends StatelessWidget {
   final String title;
   final String price;
+  final String image;
 
-  const ProductCard({super.key, required this.title, required this.price});
+  const ProductCard({
+    super.key,
+    required this.title,
+    required this.price,
+    required this.image,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.only(bottom: 16),
-      elevation: 4,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-
-        child: Row(
-          children: [
-            const Icon(Icons.shopping_bag, size: 40),
-
-            const SizedBox(width: 16),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-
-                const SizedBox(height: 16),
-
-                Text(price, style: const TextStyle(color: Colors.grey)),
-              ],
-            ),
-          ],
-        ),
+      elevation: 3,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12)
       ),
+
+      child: Padding(padding: const EdgeInsets.all(12),
+
+      child:  Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Image.network(
+              image,
+              height: 120,
+              width: double.infinity,
+              fit: BoxFit.cover,
+            )
+          ),
+
+          const SizedBox(height: 10),
+
+          Text(
+            title,
+            style: const TextStyle(
+              fontWeight: FontWeight.bold
+            ),
+          ),
+
+          const SizedBox(height: 6),
+
+          Text(
+            price,
+            style: const TextStyle(
+              color: Colors.green
+            ),
+          )
+        ],
+      ),
+      )
     );
   }
 }
